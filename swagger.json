@@ -1,23 +1,1390 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "My User Project CRUD",
-      "description": "My User Project Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0", 
+    "title": "My User Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/local/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/newUser/signUp": {
+      "post": {
+        "tags": ["New User"],
+        "description": "Register",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password": "string"
+            },
+            "required": ["email", "password"],
+            "example": {
+              "email": "my@email.com",
+              "password": "someDummyPassword@123"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
       }
     },
-    "host": "localhost:8000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
+    "/newUser/verifyUser": {
+      "post": {
+        "tags": ["New User"],
+        "description": "Verify User on Sign Up.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "username": "string"
+            },
+            "required": ["code", "username"],
+            "example": {
+              "code": "0987",
+              "username": "my@email.com"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Invalid verification code provided, please try again." }
+        }
       }
-    ],
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"]
+    },
+    "/newUser/changeEmail": {
+      "post": {
+        "tags": ["New User"],
+        "description": "Change Registered Email.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "newUsername": {
+                "type": "string"
+              },
+              "username": "string"
+            },
+            "required": ["newUsername", "username"],
+            "example": {
+              "newUsername": "mynew@email.com",
+              "username": "my@email.com"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/newUser/resendCode": {
+      "post": {
+        "tags": ["New User"],
+        "description": "Resend Code on registered Email.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string"
+            },
+            "required": ["username"],
+            "example": {
+              "username": "my@email.com"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/newUser/login": {
+      "post": {
+        "tags": ["New User"],
+        "description": "User first need to Log In here to continue with any further processes.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string",
+              "password": "string"
+            },
+            "required": ["username", "password"],
+            "example": {
+              "username": "my@email.com",
+              "password": "someDummyPassword@123"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/newUser/addPhone": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["New User"],
+        "description": "User can add phone number here & referral is available.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "phone": "string",
+              "referralCode": "string"
+            },
+            "required": ["phone"],
+            "example": {
+              "phone": "+919879879887",
+              "referralCode": "someRefferalCode"
+            }
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/newUser/verifyPhone": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["New User"],
+        "description": "User can verify phone number here.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "phone": "string",
+              "code": "string"
+            },
+            "required": ["phone", "code"],
+            "example": {
+              "phone": "+919879879887",
+              "code": "123232"
+            }
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/newUser/addInfo": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["New User"],
+        "description": "User can add user data such as profile data & address.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "address": "boolean",
+              "city": "string",
+              "houseNumber": "string",
+              "pincode": "string",
+              "street": "string",
+              "profile": "boolean",
+              "firstName": "string",
+              "middleName": "string",
+              "lastName": "string",
+              "profileImage": "string",
+              "dob": "string"
+            },
+            "required": [],
+            "example": {}
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/forgotPassword": {
+      "post": {
+        "tags": ["Password"],
+        "description": "User can request for Password Reset.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string"
+            },
+            "required": ["username"],
+            "example": {}
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/changePassword": {
+      "post": {
+        "tags": ["Password"],
+        "description": "User can request for Password Reset.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "code": "string",
+              "newPassword": "string",
+              "username": "string"
+            },
+            "required": ["username", "code", "newPassword"],
+            "example": {}
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/setMFA": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["MFA"],
+        "description": "User can Enable MFA for their account.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/validateMFA": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["MFA"],
+        "description": "User can Enable MFA for their account.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "code": "string"
+            },
+            "required": [],
+            "example": {
+              "code": "098723"
+            }
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["Log In"],
+        "description": "User can Log In.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string",
+              "password": "string"
+            },
+            "required": [],
+            "example": {
+              "username": "my@email.com",
+              "password": "someDummyPassword@123"
+            }
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/validateTOTP": {
+      "post": {
+        "tags": ["Log In"],
+        "description": "User can Log In.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string",
+              "code": "string",
+              "Session": "string"
+            },
+            "required": [],
+            "example": {
+              "username": "my@email.com",
+              "code": "TOTP from Google Auth.",
+              "Session": "session code received from Login attempt."
+            }
+          }
+        },{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/deleteUser": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Delete User"],
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/adminDeleteUser": {
+      "post": {
+        "tags": ["Admin Delete User"],
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string"
+            },
+            "required": ["username"],
+            "example": {
+              "username": "my@email.com"
+            }
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Get User"],
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "put": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Update User Data"],
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "passport": {
+                "type": "object",
+                "properties": {
+                  "passportType": "string",
+                  "number": "string",
+                  "expiryDate": "string"
+                }
+              },
+              "socialMedia": {
+                "type": "object",
+                "properties": {
+                  "facebook": "string",
+                  "twitter": "string",
+                  "tiktok": "string",
+                  "linkedin": "string",
+                  "instagram": "string"
+                }
+              },
+              "wallet": {
+                "type": "object",
+                "properties": {
+                  "value": "string"
+                }
+              }
+            },
+            "required": ["username"],
+            "example": {
+              "passport": {
+                "passportType": "somePassportType",
+                "number": "somePassportNumber",
+                "expiryDate": "someExpiryDate"
+              },
+              "socialMedia": {
+                "facebook": "someFacebookID",
+                "twitter": "someTwitterID",
+                "tiktok": "someTikTokID",
+                "linkedin": "someLinkedinID",
+                "instagram": "someInstagramID"
+              },
+              "wallet": {
+                "value": "someWalletID"
+              }
+            }
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/name": {
+      "patch": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Update User Data"],
+        "description": "Update Name.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "firstName": "string",
+              "lastName": "string",
+              "middleName": "string"
+            },
+            "required": [],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/address": {
+      "patch": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Update User Data"],
+        "description": "Update Address.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "city": "string",
+              "street": "string",
+              "state": "string",
+              "country": "string",
+              "houseNumber": "string",
+              "pincode": "string"
+            },
+            "required": [],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/allowedNotifications": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Notifications"],
+        "description": "Get Allowed Notifications.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Notifications"],
+        "description": "Update Allowed Notifications.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "newBadgeAwarded": "boolean",
+              "identificationPending": "boolean",
+              "identificationExpired": "boolean",
+              "signIn": "boolean",
+              "newBadgeArrived": "boolean"
+            },
+            "required": [],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/vendorAction/{vendorId}": {
+      "put": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendor"],
+        "description": "Update Vendor's Access.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "action": "string",
+              "access": "string",
+              "fields": ["string"]
+            },
+            "required": ["action"],
+            "example": {}
+          }
+        },  {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/logs": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Logs"],
+        "description": "Get Logs.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "query",
+          "name": "pageNo",
+          "description": "Page Number for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "in": "query",
+          "name": "pageSize",
+          "description": "PageSize for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/changeAttribute": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Change Attribute"],
+        "description": "Change/Update Attribute.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "mode": "string",
+              "attribute": "string"
+            },
+            "required": ["mode", "attribute"],
+            "example": {
+              "mode": "email",
+              "attribute": "my@email.com"
+            }
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/verifyAttribute": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Change Attribute"],
+        "description": "Verify Attribute.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "mode": "string",
+              "attribute": "string",
+              "code": "string"
+            },
+            "required": ["mode", "attribute", "code"],
+            "example": {
+              "mode": "phone_number",
+              "attribute": "+919465546513",
+              "code": "2323"
+            }
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/resendCode": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Change Attribute"],
+        "description": "Resend Code.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string"
+            },
+            "required": ["username"],
+            "example": {
+              "username": "+919465546513"
+            }
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/recoveryCode": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Recover Account"],
+        "description": "Get Recovery Codes.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/recoverUser": {
+      "post": {
+        "tags": ["Recover Account"],
+        "description": "Recover MFA.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": "string",
+              "recoveryCode": "string"
+            },
+            "required": ["email", "recoveryCode"],
+            "example": {}
+          }
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/getMFA": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Recover Account"],
+        "description": "Get MFA Codes.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/updatePassword": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Password"],
+        "description": "Update Password.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": "string",
+              "newPassword": "string"
+            },
+            "required": ["username", "newPassword"],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/vendor/create": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Create Vendor.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": "string",
+              "profile_image": "string",
+              "email": "string",
+              "phone": "string",
+              "address": "string",
+              "website": "string",
+              "sector": "string",
+              "group": "string"
+            },
+            "required": ["name"],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/vendor/getList": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Get Vendor List.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "query",
+          "name": "from",
+          "description": "Date from.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "in": "query",
+          "name": "to",
+          "description": "Date to.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/vendor/{vendorId}": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Get Vendor.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "put": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Update Vendor.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "description": "string",
+              "name": "string"
+            },
+            "required": [],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Delete Vendor.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/vendor/search": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Vendors"],
+        "description": "Get Vendor List.",
+        "produces": ["application/json"],
+        "parameters": [{
+            "in": "query",
+            "name": "pageNo",
+            "description": "Page Number for Pagination.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "3"
+            }
+          }, {
+            "in": "query",
+            "name": "pageSize",
+            "description": "PageSize for Pagination.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "3"
+            }
+          }, {
+            "in": "query",
+            "name": "name",
+            "description": "Vendor name.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "someVendor Name"
+            }
+          }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/badges/create": {
+      "post": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Badges"],
+        "description": "Create Badges.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": "string",
+              "description": "string"
+            },
+            "required": ["name"],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/badges/getList": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Badges"],
+        "description": "Get Badges List.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "query",
+          "name": "from",
+          "description": "Date from.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "in": "query",
+          "name": "to",
+          "description": "Date to.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+          }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/badges/{badgeId}": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Badges"],
+        "description": "Get Badge.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "put": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Badges"],
+        "description": "Update Badges.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Request Payload",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "description": "string",
+              "name": "string"
+            },
+            "required": [],
+            "example": {}
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["Badges"],
+        "description": "Delete Badge.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/user/getAccess/{level}": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["SumSub"],
+        "description": "Get SumSub Access Token.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    }
   }
+}
