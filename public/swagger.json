@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0", 
-    "title": "My User Project CRUD",
-    "description": "My User Project Application API",
+    "title": "Inf4mation",
+    "description": "Inf4mation Swagger Documentation",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -11,7 +11,7 @@
   },
   "host": "localhost:3000",
   "basePath": "/local/",
-  "schemes": ["http"],
+  "schemes": ["http", "https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
@@ -31,7 +31,9 @@
               "email": {
                 "type": "string"
               },
-              "password": "string"
+              "password": {
+                "type": "string"
+              }
             },
             "required": ["email", "password"],
             "example": {
@@ -41,7 +43,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -61,7 +74,9 @@
               "code": {
                 "type": "string"
               },
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["code", "username"],
             "example": {
@@ -71,8 +86,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Invalid verification code provided, please try again." }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -92,7 +117,9 @@
               "newUsername": {
                 "type": "string"
               },
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["newUsername", "username"],
             "example": {
@@ -102,7 +129,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -119,7 +157,9 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["username"],
             "example": {
@@ -128,7 +168,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -145,8 +196,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string",
-              "password": "string"
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
             },
             "required": ["username", "password"],
             "example": {
@@ -156,7 +211,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -178,8 +244,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "phone": "string",
-              "referralCode": "string"
+              "phone": {
+                "type": "string"
+              },
+              "referralCode": {
+                "type": "string"
+              }
             },
             "required": ["phone"],
             "example": {
@@ -194,7 +264,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -216,8 +297,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "phone": "string",
-              "code": "string"
+              "phone": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              }
             },
             "required": ["phone", "code"],
             "example": {
@@ -232,7 +317,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -254,17 +350,39 @@
           "schema": {
             "type": "object",
             "properties": {
-              "address": "boolean",
-              "city": "string",
-              "houseNumber": "string",
-              "pincode": "string",
-              "street": "string",
-              "profile": "boolean",
-              "firstName": "string",
-              "middleName": "string",
-              "lastName": "string",
-              "profileImage": "string",
-              "dob": "string"
+              "address": {
+                "type": "boolean"
+              },
+              "city": {
+                "type": "string"
+              },
+              "houseNumber": {
+                "type": "string"
+              },
+              "pincode": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "profile": {
+                "type": "boolean"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "middleName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "profileImage": {
+                "type": "string"
+              },
+              "dob": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {}
@@ -276,7 +394,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -293,14 +422,27 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["username"],
             "example": {}
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -317,16 +459,33 @@
           "schema": {
             "type": "object",
             "properties": {
-              "code": "string",
-              "newPassword": "string",
-              "username": "string"
+              "code": {
+                "type": "string"
+              },
+              "newPassword": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["username", "code", "newPassword"],
             "example": {}
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -347,7 +506,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -369,7 +539,9 @@
           "schema": {
             "type": "object",
             "properties": {
-              "code": "string"
+              "code": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {
@@ -383,7 +555,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -400,8 +583,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string",
-              "password": "string"
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {
@@ -409,14 +596,20 @@
               "password": "someDummyPassword@123"
             }
           }
-        },{
-          "name": "authorization",
-          "in": "header",
-          "type": "string",
-          "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -433,9 +626,15 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string",
-              "code": "string",
-              "Session": "string"
+              "username": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              },
+              "Session": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {
@@ -451,7 +650,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -459,7 +669,7 @@
       "get": {
         "security": [
           {
-              "Bearer": []
+            "Bearer": []
           }
         ],
         "tags": ["Delete User"],
@@ -472,7 +682,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -489,7 +710,9 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["username"],
             "example": {
@@ -498,7 +721,18 @@
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -506,7 +740,7 @@
       "get": {
         "security": [
           {
-              "Bearer": []
+            "Bearer": []
           }
         ],
         "tags": ["Get User"],
@@ -519,7 +753,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "put": {
@@ -542,25 +787,43 @@
               "passport": {
                 "type": "object",
                 "properties": {
-                  "passportType": "string",
-                  "number": "string",
-                  "expiryDate": "string"
+                  "passportType": {
+                    "type": "string"
+                  },
+                  "number": {
+                    "type": "string"
+                  },
+                  "expiryDate": {
+                    "type": "string"
+                  }
                 }
               },
               "socialMedia": {
                 "type": "object",
                 "properties": {
-                  "facebook": "string",
-                  "twitter": "string",
-                  "tiktok": "string",
-                  "linkedin": "string",
-                  "instagram": "string"
+                  "facebook": {
+                    "type": "string"
+                  },
+                  "twitter": {
+                    "type": "string"
+                  },
+                  "tiktok": {
+                    "type": "string"
+                  },
+                  "linkedin": {
+                    "type": "string"
+                  },
+                  "instagram": {
+                    "type": "string"
+                  }
                 }
               },
               "wallet": {
                 "type": "object",
                 "properties": {
-                  "value": "string"
+                  "value": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -590,7 +853,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -598,7 +872,7 @@
       "patch": {
         "security": [
           {
-              "Bearer": []
+            "Bearer": []
           }
         ],
         "tags": ["Update User Data"],
@@ -612,9 +886,15 @@
           "schema": {
             "type": "object",
             "properties": {
-              "firstName": "string",
-              "lastName": "string",
-              "middleName": "string"
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "middleName": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {}
@@ -626,7 +906,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -648,12 +939,24 @@
           "schema": {
             "type": "object",
             "properties": {
-              "city": "string",
-              "street": "string",
-              "state": "string",
-              "country": "string",
-              "houseNumber": "string",
-              "pincode": "string"
+              "city": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "houseNumber": {
+                "type": "string"
+              },
+              "pincode": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {}
@@ -665,7 +968,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -686,7 +1000,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "patch": {
@@ -706,11 +1031,21 @@
           "schema": {
             "type": "object",
             "properties": {
-              "newBadgeAwarded": "boolean",
-              "identificationPending": "boolean",
-              "identificationExpired": "boolean",
-              "signIn": "boolean",
-              "newBadgeArrived": "boolean"
+              "newBadgeAwarded": {
+                "type": "boolean"
+              },
+              "identificationPending": {
+                "type": "boolean"
+              },
+              "identificationExpired": {
+                "type": "boolean"
+              },
+              "signIn": {
+                "type": "boolean"
+              },
+              "newBadgeArrived": {
+                "type": "boolean"
+              }
             },
             "required": [],
             "example": {}
@@ -722,7 +1057,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -744,9 +1090,18 @@
           "schema": {
             "type": "object",
             "properties": {
-              "action": "string",
-              "access": "string",
-              "fields": ["string"]
+              "action": {
+                "type": "string"
+              },
+              "access": {
+                "type": "boolean"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
             },
             "required": ["action"],
             "example": {}
@@ -758,7 +1113,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -797,7 +1163,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -819,8 +1196,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "mode": "string",
-              "attribute": "string"
+              "mode": {
+                "type": "string"
+              },
+              "attribute": {
+                "type": "string"
+              }
             },
             "required": ["mode", "attribute"],
             "example": {
@@ -835,7 +1216,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -857,9 +1249,15 @@
           "schema": {
             "type": "object",
             "properties": {
-              "mode": "string",
-              "attribute": "string",
-              "code": "string"
+              "mode": {
+                "type": "string"
+              },
+              "attribute": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              }
             },
             "required": ["mode", "attribute", "code"],
             "example": {
@@ -875,7 +1273,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -897,7 +1306,9 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string"
+              "username": {
+                "type": "string"
+              }
             },
             "required": ["username"],
             "example": {
@@ -911,7 +1322,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -932,7 +1354,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -949,15 +1382,30 @@
           "schema": {
             "type": "object",
             "properties": {
-              "email": "string",
-              "recoveryCode": "string"
+              "email": {
+                "type": "string"
+              },
+              "recoveryCode": {
+                "type": "string"
+              }
             },
             "required": ["email", "recoveryCode"],
             "example": {}
           }
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -978,7 +1426,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1000,8 +1459,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "username": "string",
-              "newPassword": "string"
+              "username": {
+                "type": "string"
+              },
+              "newPassword": {
+                "type": "string"
+              }
             },
             "required": ["username", "newPassword"],
             "example": {}
@@ -1013,7 +1476,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1035,14 +1509,30 @@
           "schema": {
             "type": "object",
             "properties": {
-              "name": "string",
-              "profile_image": "string",
-              "email": "string",
-              "phone": "string",
-              "address": "string",
-              "website": "string",
-              "sector": "string",
-              "group": "string"
+              "name": {
+                "type": "string"
+              },
+              "profile_image": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "sector": {
+                "type": "string"
+              },
+              "group": {
+                "type": "string"
+              }
             },
             "required": ["name"],
             "example": {}
@@ -1054,7 +1544,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1093,7 +1594,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1114,7 +1626,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "put": {
@@ -1134,8 +1657,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "description": "string",
-              "name": "string"
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {}
@@ -1147,7 +1674,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "delete": {
@@ -1166,7 +1704,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1214,7 +1763,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1236,8 +1796,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "name": "string",
-              "description": "string"
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
             },
             "required": ["name"],
             "example": {}
@@ -1249,7 +1813,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1288,7 +1863,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1309,7 +1895,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "put": {
@@ -1329,8 +1926,12 @@
           "schema": {
             "type": "object",
             "properties": {
-              "description": "string",
-              "name": "string"
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
             },
             "required": [],
             "example": {}
@@ -1342,7 +1943,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       },
       "delete": {
@@ -1361,7 +1973,18 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
         }
       }
     },
@@ -1382,7 +2005,40 @@
           "required": true
         }],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "responseModel": {
+      "type": "object",
+      "required": [
+        "code",
+        "message",
+        "data"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
         }
       }
     }

@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const port = 8000;
 const swaggerUi = require("swagger-ui-express"),
-swaggerDocument = require("./swagger.json");
+swaggerDocument = require("./public/swagger.json");
+
+app.use(express.static('public'));
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
