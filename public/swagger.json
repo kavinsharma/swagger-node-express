@@ -825,6 +825,9 @@
                     "type": "string"
                   }
                 }
+              },
+              "marketingUpdates": {
+                "type": "boolean"
               }
             },
             "required": ["username"],
@@ -1083,6 +1086,13 @@
         "description": "Update Vendor's Access.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "vendorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "in": "body",
           "name": "body",
           "description": "Request Payload",
@@ -1491,6 +1501,225 @@
         }
       }
     },
+    "/user/vendors": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["User"],
+        "description": "Get user's vendors list.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "query",
+          "name": "pageNo",
+          "description": "Page Number for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "description": "PageSize for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/badges": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["User"],
+        "description": "Get user's vendors list.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/addBadge": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["User"],
+        "description": "Award Badge to user.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "path",
+          "name": "badgeId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/vendor/{vendorId}": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["User"],
+        "description": "Get user's vendor data.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "path",
+          "name": "vendorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/searchVendors": {
+      "get": {
+        "security": [
+          {
+              "Bearer": []
+          }
+        ],
+        "tags": ["User"],
+        "description": "Get user's vendor.",
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "query",
+          "name": "pageNo",
+          "description": "Page Number for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "description": "PageSize for Pagination.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "3"
+          }
+        }, {
+          "in": "query",
+          "name": "name",
+          "description": "Vendor name.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "someVendor Name"
+          }
+        }, {
+          "name": "authorization",
+          "in": "header",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/responseModel"
+            }
+          }
+        }
+      }
+    },
     "/vendor/create": {
       "post": {
         "security": [
@@ -1571,23 +1800,23 @@
         "produces": ["application/json"],
         "parameters": [{
           "in": "query",
-          "name": "from",
-          "description": "Date from.",
+          "name": "pageNo",
+          "description": "Page Number for Pagination.",
           "required": false,
           "schema": {
             "type": "string",
             "example": "3"
           }
-          }, {
+        }, {
           "in": "query",
-          "name": "to",
-          "description": "Date to.",
+          "name": "pageSize",
+          "description": "PageSize for Pagination.",
           "required": false,
           "schema": {
             "type": "string",
             "example": "3"
           }
-          }, {
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
@@ -1620,6 +1849,13 @@
         "description": "Get Vendor.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "vendorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
@@ -1650,6 +1886,13 @@
         "description": "Update Vendor.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "vendorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "in": "body",
           "name": "body",
           "description": "Request Payload",
@@ -1698,6 +1941,13 @@
         "description": "Delete Vendor.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "vendorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
@@ -1889,6 +2139,13 @@
         "description": "Get Badge.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "badgeId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
@@ -1919,6 +2176,13 @@
         "description": "Update Badges.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "badgeId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "in": "body",
           "name": "body",
           "description": "Request Payload",
@@ -1967,6 +2231,13 @@
         "description": "Delete Badge.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "badgeId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
@@ -1999,6 +2270,14 @@
         "description": "Get SumSub Access Token.",
         "produces": ["application/json"],
         "parameters": [{
+          "in": "path",
+          "name": "level",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "example": "MSDK_Trial"
+        }, {
           "name": "authorization",
           "in": "header",
           "type": "string",
